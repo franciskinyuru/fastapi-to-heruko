@@ -1,6 +1,6 @@
 # This is the .github/workflows/main.yml
 
-name: Deploy    # Name of the workflow
+name: Deploy to heruko    # Name of the workflow
 
 # Events that trigger a workflow:
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
@@ -28,7 +28,8 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key:  ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "fastapiwithgitactions"
-          heroku_email: "franciskinyuru26@gmail.com"
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email:  ${{ secrets.HEROKU_APP_EMAIL }}
           healthcheck: https://fastapiwithgitactions.herokuapp.com/checks
           rollbackonhealthcheckfailed: true
+
