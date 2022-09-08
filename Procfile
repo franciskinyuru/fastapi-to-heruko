@@ -1,1 +1,1 @@
-uvicorn main:app --host=0.0.0.0 --port=${PORT:-5000} --workers 4
+uvicorn main:app --host=127.0.0.1 --port=5000 --workers 4
