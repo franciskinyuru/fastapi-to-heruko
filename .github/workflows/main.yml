@@ -1,35 +1,20 @@
-# This is the .github/workflows/main.yml
 
-name: Deploy to heruko    # Name of the workflow
+name: Deploy-to-heruko
 
-# Events that trigger a workflow:
-# https://docs.github.com/en/actions/reference/events-that-trigger-workflows
-on: push
-
+on:
+  push:
+    branches:
+      - master
 jobs:
-  # Check out the following article for more inspiration on setting up a
-  # standard CI/CD pipeline for most Python projects:
-  # https://jarmos.netlify.app/posts/a-standard-ci-cd-pipeline-for-python-projects/
-  #test:
-  # Include your test suite here.
-  #lint:
-  # Lint & format your code over here.
+
   deploy:
-    # If the test & lint jobs don't pass,
-    # the deploy job willn't even execute
-    #needs: [test, lint]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Deploying to Heroku
-        # More details available at:
-        # https://github.com/akhileshns/heroku-deploy
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key:  ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email:  ${{ secrets.HEROKU_APP_EMAIL }}
-          healthcheck: https://fastapiwithgitactions.herokuapp.com/checks
-          rollbackonhealthcheckfailed: true
-
+          procfile: 'uvicorn main:app --host=0.0.0.0 --port=${PORT:-5000} --workers 4'
