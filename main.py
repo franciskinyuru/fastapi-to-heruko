@@ -13,3 +13,7 @@ async def root():
 async def healthcheck():
     response = {"statusCode": 200, "description": "Success"}
     return response
+@app.get("/items", status_code=status.HTTP_200_OK)
+async def check():
+    response = {"book": "FastAPI", "Author": "Tiangolo"}
+    return response
