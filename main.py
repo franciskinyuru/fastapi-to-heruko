@@ -18,7 +18,7 @@ async def healthcheck():
 
 @app.get("/items", status_code=status.HTTP_200_OK)
 async def check():
-    response = {"book": "FastAPI", "Author": "Tiangolo"}
+    response = {"Framework": "FastAPI", "Author": "Tiangolo"}
     return response
 
 
